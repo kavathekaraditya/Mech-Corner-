@@ -3,12 +3,12 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID
+  apiKey: "AIzaSyANYtP5XWi9Wit5Qf_E9GBQrI2tafqHLLI",
+  authDomain: "mech-corner.firebaseapp.com",
+  projectId: "mech-corner",
+  storageBucket: "mech-corner.firebasestorage.app",
+  messagingSenderId: "755202984974",
+  appId: "1:755202984974:web:009283fa090da79b62c05f"
 };
 
 const app = initializeApp(firebaseConfig);
