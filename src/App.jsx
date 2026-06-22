@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './App.css';
 import { useAppState } from './context/StateContext';
 import { useI18n } from './utils/i18n';
 import Header from './components/Header';
