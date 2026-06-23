@@ -15,7 +15,7 @@ export default function Contact({ query }) {
   const [message, setMessage] = useState('');
 
   // Form Errors State
-  const [errors, setErrors] = useState({ name: false, email: false, message: false });
+  const [errors, setErrors] = useState({ name: false, email: false, phone: false, message: false });
 
   // Map pin tooltip toggle
   const [mapTooltipOpen, setMapTooltipOpen] = useState(false);
@@ -41,7 +41,7 @@ export default function Contact({ query }) {
     e.preventDefault();
 
     let isValid = true;
-    const newErrors = { name: false, email: false, message: false };
+    const newErrors = { name: false, email: false, phone: false, message: false };
 
     // Name Validate (min 3 chars)
     if (!name || name.trim().length < 3) {
@@ -53,6 +53,13 @@ export default function Contact({ query }) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email || !emailRegex.test(email)) {
       newErrors.email = true;
+      isValid = false;
+    }
+
+    // Phone Validate (Optional, but if filled must be 10-15 digits)
+    const phoneRegex = /^[0-9]{10,15}$/;
+    if (phone && !phoneRegex.test(phone.trim())) {
+      newErrors.phone = true;
       isValid = false;
     }
 
@@ -151,11 +158,14 @@ export default function Contact({ query }) {
                   <input
                     type="tel"
                     id="contact-phone"
-                    className="form-input"
-                    placeholder="e.g. +1 (555) 019-2834"
+                    className={`form-input ${errors.phone ? 'error' : ''}`}
+                    placeholder="e.g. 9876543210"
                     value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
                   />
+                  {errors.phone && (
+                    <div className="form-error-msg">{t('contact_err_phone')}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <label htmlFor="contact-interest" className="form-label">{t('contact_interest')}</label>
