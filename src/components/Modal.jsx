@@ -36,6 +36,10 @@ export default function Modal() {
         return <ScheduleEventModal onClose={hideModal} />;
       case 'enquiry-detail':
         return <EnquiryDetailModal enquiry={modal.data} onClose={hideModal} />;
+      case 'add-testimonial':
+        return <AddEditTestimonialModal onClose={hideModal} />;
+      case 'edit-testimonial':
+        return <AddEditTestimonialModal testimonial={modal.data} onClose={hideModal} />;
       default:
         return null;
     }
@@ -418,6 +422,123 @@ function EnquiryDetailModal({ enquiry, onClose }) {
           <button type="button" className="btn btn-secondary" onClick={onClose}>{t('btn_close')}</button>
         </div>
       </div>
+    </>
+  );
+}
+
+/* ==========================================
+   Add/Edit Testimonial Modal
+   ========================================== */
+function AddEditTestimonialModal({ testimonial, onClose }) {
+  const { t } = useI18n();
+  const { saveTestimonial, addToast } = useAppState();
+
+  const isEdit = !!testimonial;
+  const [name, setName] = useState(testimonial ? testimonial.name : '');
+  const [avatar, setAvatar] = useState(testimonial ? testimonial.avatar : '');
+  const [role, setRole] = useState(testimonial ? testimonial.role : '');
+  const [quote, setQuote] = useState(testimonial ? testimonial.quote : '');
+
+  // Auto-generate avatar initials when name changes
+  useEffect(() => {
+    if (!isEdit && name) {
+      const parts = name.trim().split(/\s+/);
+      let initials = '';
+      if (parts.length > 0) {
+        initials += parts[0][0] || '';
+      }
+      if (parts.length > 1) {
+        initials += parts[parts.length - 1][0] || '';
+      }
+      setAvatar(initials.toUpperCase().slice(0, 2));
+    }
+  }, [name, isEdit]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!name || !avatar || !role || !quote) {
+      addToast('Please fill out all fields.', 'error');
+      return;
+    }
+
+    const updatedTestimonial = {
+      id: testimonial ? testimonial.id : "test-" + Date.now(),
+      name,
+      avatar: avatar.toUpperCase().slice(0, 2),
+      role,
+      quote
+    };
+
+    saveTestimonial(updatedTestimonial);
+    addToast(isEdit ? 'Successfully updated testimonial.' : 'Successfully added testimonial.', 'success');
+    onClose();
+  };
+
+  return (
+    <>
+      <h2 style={{ fontFamily: 'var(--font-headings)', color: 'var(--color-primary)', marginBottom: '24px' }}>
+        {isEdit ? t('admin_modal_edit_test_title') || 'Edit Testimonial' : t('admin_modal_add_test_title') || 'Add Testimonial'}
+      </h2>
+      <form onSubmit={handleSubmit} className="auth-form">
+        <div className="form-grid-2">
+          <div className="form-group">
+            <label className="form-label">{t('admin_modal_test_name') || 'Customer Name'}</label>
+            <input
+              type="text"
+              className="form-input"
+              placeholder="e.g. Raj Patel"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label">{t('admin_modal_test_avatar') || 'Avatar Initials'}</label>
+            <input
+              type="text"
+              className="form-input"
+              placeholder="e.g. RP"
+              maxLength="2"
+              required
+              value={avatar}
+              onChange={(e) => setAvatar(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="form-group" style={{ marginTop: '16px' }}>
+          <label className="form-label">{t('admin_modal_test_role') || 'Customer Role / Details'}</label>
+          <input
+            type="text"
+            className="form-input"
+            placeholder="e.g. Organic Vegetable Farmer"
+            required
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group" style={{ marginTop: '16px' }}>
+          <label className="form-label">{t('admin_modal_test_quote') || 'Quote / Success Story'}</label>
+          <textarea
+            className="form-textarea"
+            rows="5"
+            placeholder="Enter the customer's quote..."
+            required
+            value={quote}
+            onChange={(e) => setQuote(e.target.value)}
+          />
+        </div>
+
+        <div style={{ display: 'flex', gap: '16px', marginTop: '24px' }}>
+          <button type="submit" className="btn btn-primary">
+            {isEdit ? t('admin_modal_test_btn_save') || 'Save Changes' : t('admin_modal_test_btn_create') || 'Create Testimonial'}
+          </button>
+          <button type="button" className="btn btn-secondary" onClick={onClose}>
+            {t('admin_modal_add_btn_cancel') || 'Cancel'}
+          </button>
+        </div>
+      </form>
     </>
   );
 }

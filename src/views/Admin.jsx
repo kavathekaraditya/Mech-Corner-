@@ -10,12 +10,14 @@ export default function Admin() {
     users,
     events,
     enquiries,
+    testimonials,
     language,
     setLanguage,
     saveProduct,
     deleteProduct,
     deleteEvent,
     deleteEnquiry,
+    deleteTestimonial,
     showModal,
     addToast
   } = useAppState();
@@ -132,6 +134,13 @@ export default function Admin() {
     }
   };
 
+  const handleTestimonialDelete = (test) => {
+    if (window.confirm(t('admin_test_confirm_delete') || `Are you sure you want to delete this testimonial from ${test.name}?`)) {
+      deleteTestimonial(test.id);
+      addToast(t('admin_test_toast_delete_success') || `Successfully deleted testimonial from ${test.name}`, 'info');
+    }
+  };
+
   return (
     <>
       {/* Admin Mobile Header */}
@@ -243,6 +252,15 @@ export default function Admin() {
               >
                 {Icons.mail} {t('admin_tab_enquiries')}
               </button>
+              <button
+                className={`admin-nav-btn ${activeAdminTab === 'testimonials' ? 'active' : ''}`}
+                onClick={() => {
+                  setActiveAdminTab('testimonials');
+                  setMobileSidebarOpen(false);
+                }}
+              >
+                {Icons.quote} {t('admin_tab_testimonials') || 'Testimonials'}
+              </button>
             </nav>
 
             <div className="admin-sidebar-footer">
@@ -299,6 +317,13 @@ export default function Admin() {
                     <div className="admin-stat-details">
                       <h4>{t('admin_dash_enquiries')}</h4>
                       <div className="admin-stat-value">{enquiries.length} {t('admin_suffix_inquiries')}</div>
+                    </div>
+                  </div>
+                  <div className="admin-stat-card glass-card" onClick={() => setActiveAdminTab('testimonials')} style={{ cursor: 'pointer' }}>
+                    <div className="admin-stat-icon">{Icons.quote}</div>
+                    <div className="admin-stat-details">
+                      <h4>{t('admin_dash_testimonials') || 'Testimonials'}</h4>
+                      <div className="admin-stat-value">{testimonials.length} {t('admin_suffix_testimonials') || 'Approved'}</div>
                     </div>
                   </div>
                 </div>
@@ -662,6 +687,84 @@ export default function Admin() {
                           <tr>
                             <td colSpan="6" style={{ textAlign: 'center', color: 'var(--color-text-muted)' }}>
                               {t('admin_enq_empty')}
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {activeAdminTab === 'testimonials' && (
+              <>
+                <div className="admin-view-header">
+                  <h2 className="admin-view-title">{t('admin_test_title') || 'Testimonials'}</h2>
+                  <div className="admin-view-header-actions" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                    <button className="btn btn-secondary" onClick={() => setActiveAdminTab('dashboard')}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                      </svg>
+                      {t('btn_back')}
+                    </button>
+                    <button className="btn btn-primary" onClick={() => showModal('add-testimonial')}>
+                      {Icons.plus} {t('admin_test_btn_add') || 'Add Testimonial'}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="glass-card">
+                  <div className="admin-table-wrapper">
+                    <table className="admin-table">
+                      <thead>
+                        <tr>
+                          <th style={{ width: '80px' }}>{t('admin_test_th_avatar') || 'Avatar'}</th>
+                          <th style={{ width: '180px' }}>{t('admin_test_th_name') || 'Name'}</th>
+                          <th style={{ width: '200px' }}>{t('admin_test_th_role') || 'Role'}</th>
+                          <th>{t('admin_test_th_quote') || 'Quote'}</th>
+                          <th style={{ width: '120px' }}>{t('admin_prod_th_actions')}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {testimonials.map(test => (
+                          <tr key={test.id}>
+                            <td data-label="Avatar">
+                              <div className="author-avatar" style={{ margin: 0, width: '36px', height: '36px', fontSize: '0.85rem' }}>
+                                {test.avatar}
+                              </div>
+                            </td>
+                            <td data-label="Name"><strong>{test.name}</strong></td>
+                            <td data-label="Role">{test.role}</td>
+                            <td data-label="Quote" style={{ fontSize: '0.85rem', fontStyle: 'italic', maxWidth: '300px', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }} title={test.quote}>
+                              {test.quote}
+                            </td>
+                            <td data-label="Actions">
+                              <div className="admin-actions-cell">
+                                <button
+                                  className="btn-action"
+                                  onClick={() => showModal('edit-testimonial', test)}
+                                  title="Edit Testimonial"
+                                  style={{ background: 'rgba(25, 103, 62, 0.05)', color: 'var(--color-primary)' }}
+                                >
+                                  {Icons.edit}
+                                </button>
+                                <button
+                                  className="btn-action btn-action-delete"
+                                  onClick={() => handleTestimonialDelete(test)}
+                                  title="Delete Testimonial"
+                                >
+                                  {Icons.trash}
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                        {testimonials.length === 0 && (
+                          <tr>
+                            <td colSpan="5" style={{ textAlign: 'center', color: 'var(--color-text-muted)' }}>
+                              {t('admin_test_empty') || 'No testimonials found.'}
                             </td>
                           </tr>
                         )}

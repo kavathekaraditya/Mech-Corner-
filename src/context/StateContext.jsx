@@ -436,6 +436,30 @@ const INITIAL_ENQUIRIES = [
   }
 ];
 
+const INITIAL_TESTIMONIALS = [
+  {
+    id: "test-1",
+    quote: `"The Lu Shyoung LS-30 plunger pump has transformed our orchard spraying program. We run three nozzles on a single pump and the pressure stays absolutely steady. Outstanding reliability."`,
+    avatar: "AM",
+    name: "Arthur Miller",
+    role: "Commercial Vineyard Owner"
+  },
+  {
+    id: "test-2",
+    quote: `"As a smallholder, the SM-16 Samarat was exactly what I needed. It is lightweight, the straps are padded, and pumping takes very little effort compared to my old manual sprayers."`,
+    avatar: "RP",
+    name: "Raj Patel",
+    role: "Organic Vegetable Farmer"
+  },
+  {
+    id: "test-3",
+    quote: `"Upgraded to the LS-16E-3 battery sprayer last season. The 12V battery lasts for hours, allowing us to cover three greenhouse blocks without recharging. Saved us hours of labor."`,
+    avatar: "SL",
+    name: "Sarah Lindqvist",
+    role: "Greenhouse Manager"
+  }
+];
+
 const seedSyncProductIds = [
   "prod-hdpe-agri-pipe",
   "prod-mdpe-utility-pipe",
@@ -491,6 +515,9 @@ export function StateProvider({ children }) {
 
   // 6. Enquiries State
   const [enquiries, setEnquiriesState] = useState([]);
+
+  // Testimonials State
+  const [testimonials, setTestimonialsState] = useState([]);
 
   // Toasts UI State
   const [toasts, setToasts] = useState([]);
@@ -562,6 +589,24 @@ export function StateProvider({ children }) {
         });
       } else {
         setEnquiriesState(list);
+      }
+    });
+    return () => unsub();
+  }, []);
+
+  // Testimonials Listener with Seeding fallback
+  useEffect(() => {
+    const unsub = onSnapshot(collection(db, 'testimonials'), (snapshot) => {
+      const list = [];
+      snapshot.forEach(doc => {
+        list.push({ id: doc.id, ...doc.data() });
+      });
+      if (list.length === 0) {
+        INITIAL_TESTIMONIALS.forEach(async (t) => {
+          await setDoc(doc(db, 'testimonials', t.id), t);
+        });
+      } else {
+        setTestimonialsState(list);
       }
     });
     return () => unsub();
@@ -731,6 +776,24 @@ export function StateProvider({ children }) {
     }
   };
 
+  const saveTestimonial = async (testimonial) => {
+    try {
+      await setDoc(doc(db, 'testimonials', testimonial.id), testimonial);
+    } catch (err) {
+      console.error("Error saving testimonial: ", err);
+      addToast("Failed to save testimonial to database.", "error");
+    }
+  };
+
+  const deleteTestimonial = async (id) => {
+    try {
+      await deleteDoc(doc(db, 'testimonials', id));
+    } catch (err) {
+      console.error("Error deleting testimonial: ", err);
+      addToast("Failed to delete testimonial.", "error");
+    }
+  };
+
   return (
     <StateContext.Provider value={{
       language,
@@ -740,6 +803,7 @@ export function StateProvider({ children }) {
       products,
       events,
       enquiries,
+      testimonials,
       getProductById,
       saveProduct,
       deleteProduct,
@@ -751,6 +815,8 @@ export function StateProvider({ children }) {
       deleteEvent,
       saveEnquiry,
       deleteEnquiry,
+      saveTestimonial,
+      deleteTestimonial,
       toasts,
       addToast,
       modal,

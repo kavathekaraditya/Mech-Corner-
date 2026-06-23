@@ -4,7 +4,7 @@ import { useI18n } from '../utils/i18n';
 import { getCategoryIcon } from '../components/Icons';
 
 export default function Home() {
-  const { products, showModal } = useAppState();
+  const { products, showModal, testimonials } = useAppState();
   const { t } = useI18n();
 
   // 1. Hero Image Slider State
@@ -74,39 +74,22 @@ export default function Home() {
 
   // 2. Testimonials Carousel State
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const testimonials = [
-    {
-      quote: `"The Lu Shyoung LS-30 plunger pump has transformed our orchard spraying program. We run three nozzles on a single pump and the pressure stays absolutely steady. Outstanding reliability."`,
-      avatar: 'AM',
-      name: 'Arthur Miller',
-      role: 'Commercial Vineyard Owner'
-    },
-    {
-      quote: `"As a smallholder, the SM-16 Samarat was exactly what I needed. It is lightweight, the straps are padded, and pumping takes very little effort compared to my old manual sprayers."`,
-      avatar: 'RP',
-      name: 'Raj Patel',
-      role: 'Organic Vegetable Farmer'
-    },
-    {
-      quote: `"Upgraded to the LS-16E-3 battery sprayer last season. The 12V battery lasts for hours, allowing us to cover three greenhouse blocks without recharging. Saved us hours of labor."`,
-      avatar: 'SL',
-      name: 'Sarah Lindqvist',
-      role: 'Greenhouse Manager'
-    }
-  ];
 
   useEffect(() => {
+    if (testimonials.length === 0) return;
     const timer = setInterval(() => {
       setCurrentTestimonial(prev => (prev + 1) % testimonials.length);
     }, 7000);
     return () => clearInterval(timer);
-  }, []);
+  }, [testimonials.length]);
 
   const nextTestimonial = () => {
+    if (testimonials.length === 0) return;
     setCurrentTestimonial(prev => (prev + 1) % testimonials.length);
   };
 
   const prevTestimonial = () => {
+    if (testimonials.length === 0) return;
     setCurrentTestimonial(prev => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
