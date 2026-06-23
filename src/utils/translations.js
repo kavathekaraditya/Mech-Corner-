@@ -320,7 +320,29 @@ const translations = {
     admin_modal_enq_date: "Received Date:",
     admin_modal_enq_msg: "Message:",
     admin_modal_enq_btn_reply: "Reply by Email",
-    admin_toast_signout: "Signed out of admin portal."
+    admin_toast_signout: "Signed out of admin portal.",
+
+    // Testimonials Tab
+    admin_tab_testimonials: "Testimonials",
+    admin_test_title: "Testimonials Manager",
+    admin_test_btn_add: "Add Testimonial",
+    admin_test_th_avatar: "Avatar",
+    admin_test_th_name: "Name",
+    admin_test_th_role: "Role",
+    admin_test_th_quote: "Quote",
+    admin_test_empty: "No testimonials found.",
+    admin_test_confirm_delete: "Are you sure you want to delete the testimonial from {name}?",
+    admin_test_toast_delete_success: "Testimonial from {name} has been deleted.",
+    admin_dash_testimonials: "Testimonials",
+    admin_suffix_testimonials: "Approved",
+    admin_modal_add_test_title: "Add Testimonial",
+    admin_modal_edit_test_title: "Edit Testimonial",
+    admin_modal_test_name: "Customer Name *",
+    admin_modal_test_avatar: "Avatar Initials *",
+    admin_modal_test_role: "Customer Role / Details *",
+    admin_modal_test_quote: "Quote / Success Story *",
+    admin_modal_test_btn_create: "Create Testimonial",
+    admin_modal_test_btn_save: "Save Changes"
   },
   mr: {
     // Navigation
@@ -637,7 +659,29 @@ const translations = {
     admin_modal_enq_date: "प्राप्त झालेली तारीख:",
     admin_modal_enq_msg: "मेसेज:",
     admin_modal_enq_btn_reply: "ईमेलद्वारे उत्तर द्या",
-    admin_toast_signout: "ॲडमिन पोर्टलवरून लॉग आउट केले."
+    admin_toast_signout: "ॲडमिन पोर्टलवरून लॉग आउट केले.",
+
+    // Testimonials Tab
+    admin_tab_testimonials: "ग्राहक अभिप्राय (Testimonials)",
+    admin_test_title: "अभिप्राय व्यवस्थापक",
+    admin_test_btn_add: "अभिप्राय जोडा",
+    admin_test_th_avatar: "अवतार",
+    admin_test_th_name: "नाव",
+    admin_test_th_role: "भूमिका",
+    admin_test_th_quote: "अभिप्राय",
+    admin_test_empty: "कोणतेही अभिप्राय आढळले नाहीत.",
+    admin_test_confirm_delete: "तुम्हाला खात्री आहे की तुम्ही {name} कडून आलेला अभिप्राय हटवू इच्छिता?",
+    admin_test_toast_delete_success: "{name} कडून आलेला अभिप्राय हटवला गेला आहे.",
+    admin_dash_testimonials: "एकूण अभिप्राय",
+    admin_suffix_testimonials: "मंजूर",
+    admin_modal_add_test_title: "नवीन अभिप्राय जोडा",
+    admin_modal_edit_test_title: "अभिप्राय संपादित करा",
+    admin_modal_test_name: "ग्राहकाचे नाव *",
+    admin_modal_test_avatar: "अवतार आद्याक्षरे *",
+    admin_modal_test_role: "ग्राहकाची भूमिका / तपशील *",
+    admin_modal_test_quote: "अभिप्राय / यशोगाथा *",
+    admin_modal_test_btn_create: "अभिप्राय तयार करा",
+    admin_modal_test_btn_save: "बदल जतन करा"
   },
   hi: {
     // Navigation
@@ -953,7 +997,29 @@ const translations = {
     admin_modal_enq_date: "प्राप्त तिथि:",
     admin_modal_enq_msg: "संदेश:",
     admin_modal_enq_btn_reply: "ईमेल से उत्तर दें",
-    admin_toast_signout: "एडमिन पोर्टल से लॉग आउट किया गया।"
+    admin_toast_signout: "एडमिन पोर्टल से लॉग आउट किया गया।",
+
+    // Testimonials Tab
+    admin_tab_testimonials: "ग्राहक समीक्षाएं (Testimonials)",
+    admin_test_title: "समीक्षा प्रबंधक",
+    admin_test_btn_add: "समीक्षा जोड़ें",
+    admin_test_th_avatar: "अवतार",
+    admin_test_th_name: "नाम",
+    admin_test_th_role: "भूमिका",
+    admin_test_th_quote: "समीक्षा",
+    admin_test_empty: "कोई समीक्षा नहीं मिली।",
+    admin_test_confirm_delete: "क्या आप वाकई {name} की समीक्षा हटाना चाहते हैं?",
+    admin_test_toast_delete_success: "{name} की समीक्षा हटा दी गई है।",
+    admin_dash_testimonials: "कुल समीक्षाएं",
+    admin_suffix_testimonials: "स्वीकृत",
+    admin_modal_add_test_title: "नई समीक्षा जोड़ें",
+    admin_modal_edit_test_title: "समीक्षा संपादित करें",
+    admin_modal_test_name: "ग्राहक का नाम *",
+    admin_modal_test_avatar: "अवतार के प्रारंभिक अक्षर *",
+    admin_modal_test_role: "ग्राहक की भूमिका / विवरण *",
+    admin_modal_test_quote: "समीक्षा / सफलता की कहानी *",
+    admin_modal_test_btn_create: "समीक्षा बनाएं",
+    admin_modal_test_btn_save: "बदलाव सहेजें"
   }
 };
 

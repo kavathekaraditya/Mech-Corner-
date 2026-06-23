@@ -135,9 +135,9 @@ export default function Admin() {
   };
 
   const handleTestimonialDelete = (test) => {
-    if (window.confirm(t('admin_test_confirm_delete') || `Are you sure you want to delete this testimonial from ${test.name}?`)) {
+    if (window.confirm(t('admin_test_confirm_delete').replace('{name}', test.name))) {
       deleteTestimonial(test.id);
-      addToast(t('admin_test_toast_delete_success') || `Successfully deleted testimonial from ${test.name}`, 'info');
+      addToast(t('admin_test_toast_delete_success').replace('{name}', test.name), 'info');
     }
   };
 
