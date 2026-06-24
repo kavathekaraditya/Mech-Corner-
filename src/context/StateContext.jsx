@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { db, auth } from '../firebase';
+import { deleteImageFromCloudinary } from '../utils/cloudinary';
 import {
   collection,
   doc,
@@ -667,10 +668,24 @@ export function StateProvider({ children }) {
 
   const deleteProduct = async (id) => {
     try {
+      // Find the product to get its Cloudinary public_id before deleting
+      const productToDelete = products.find(p => p.id === id);
+
+      // Step 1: Delete image from Cloudinary (if it has one)
+      if (productToDelete?.cloudinaryPublicId) {
+        try {
+          await deleteImageFromCloudinary(productToDelete.cloudinaryPublicId);
+        } catch (cloudinaryErr) {
+          // Log warning but don't block product deletion
+          console.warn('Could not delete Cloudinary image (will still remove product):', cloudinaryErr.message);
+        }
+      }
+
+      // Step 2: Delete product from Firestore
       await deleteDoc(doc(db, 'products', id));
     } catch (err) {
-      console.error("Error deleting product: ", err);
-      addToast("Failed to delete product.", "error");
+      console.error('Error deleting product: ', err);
+      addToast('Failed to delete product.', 'error');
     }
   };
 

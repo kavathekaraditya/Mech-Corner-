@@ -85,3 +85,49 @@ export function validateImageFile(file, maxSizeMB = 5) {
 
   return { valid: true };
 }
+
+/**
+ * Delete an image from Cloudinary via the secure server-side API endpoint.
+ * The API Secret is NEVER exposed to the browser — it lives in the
+ * Vercel serverless function (/api/delete-cloudinary-image).
+ *
+ * @param {string} publicId - The Cloudinary public_id to delete (e.g. "mech_corner_products/abc123")
+ * @returns {Promise<{ success: boolean, message: string }>}
+ */
+export async function deleteImageFromCloudinary(publicId) {
+  if (!publicId || typeof publicId !== 'string') {
+    // No publicId means the product used a local/default image — nothing to delete
+    return { success: true, message: 'No Cloudinary image to delete.' };
+  }
+
+  try {
+    const response = await fetch('/api/delete-cloudinary-image', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ publicId }),
+    });
+
+    // If running locally with npm run dev (no serverless function), gracefully skip
+    if (response.status === 404) {
+      console.info('ℹ️ Cloudinary delete API not available locally. Image will be deleted on Vercel deployment.');
+      return { success: true, message: 'Skipped (local dev mode).' };
+    }
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to delete image from Cloudinary');
+    }
+
+    return data;
+  } catch (err) {
+    // Network error (e.g. running locally) — don't block product deletion
+    if (err.message.includes('fetch') || err.message.includes('Failed to fetch')) {
+      console.info('ℹ️ Cloudinary delete skipped (local dev — no serverless endpoint).');
+      return { success: true, message: 'Skipped (local dev mode).' };
+    }
+    throw err;
+  }
+}
+
+
