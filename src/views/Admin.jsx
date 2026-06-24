@@ -474,8 +474,16 @@ export default function Admin() {
                                 <div className="admin-actions-cell">
                                   <button
                                     className="btn-action"
+                                    onClick={() => showModal('edit-product', p)}
+                                    title="Edit Product & Image"
+                                    style={{ background: 'rgba(25, 103, 62, 0.05)', color: 'var(--color-primary)' }}
+                                  >
+                                    {Icons.edit}
+                                  </button>
+                                  <button
+                                    className="btn-action"
                                     onClick={() => saveProductChanges(p)}
-                                    title="Save Changes"
+                                    title="Save Price/Stock Changes"
                                     style={{ background: 'rgba(25, 103, 62, 0.05)', color: 'var(--color-primary)' }}
                                   >
                                     {Icons.check}
