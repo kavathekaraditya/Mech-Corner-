@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgriModern - Precision Farming Solutions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "outline-variant": "#c1c8c2",
+                "on-tertiary-fixed": "#001c39",
+                "on-secondary-container": "#622400",
+                "on-tertiary-fixed-variant": "#004884",
+                "surface-container-low": "#f3f4f5",
+                "on-primary-container": "#86af99",
+                "inverse-primary": "#a5d0b9",
+                "background": "#f8f9fa",
+                "surface": "#f8f9fa",
+                "primary-fixed-dim": "#a5d0b9",
+                "surface-bright": "#f8f9fa",
+                "error-container": "#ffdad6",
+                "primary-fixed": "#c1ecd4",
+                "tertiary-fixed-dim": "#a4c9ff",
+                "on-primary-fixed": "#002114",
+                "on-background": "#191c1d",
+                "surface-tint": "#3f6653",
+                "on-tertiary-container": "#63a8ff",
+                "inverse-surface": "#2e3132",
+                "on-tertiary": "#ffffff",
+                "tertiary": "#00264b",
+                "on-surface-variant": "#414844",
+                "tertiary-fixed": "#d4e3ff",
+                "on-primary": "#ffffff",
+                "surface-container-highest": "#e1e3e4",
+                "surface-variant": "#e1e3e4",
+                "tertiary-container": "#003c70",
+                "surface-dim": "#d9dadb",
+                "on-primary-fixed-variant": "#274e3d",
+                "on-secondary-fixed-variant": "#7b2f00",
+                "surface-container-high": "#e7e8e9",
+                "on-secondary-fixed": "#351000",
+                "outline": "#717973",
+                "on-surface": "#191c1d",
+                "on-error": "#ffffff",
+                "secondary-fixed-dim": "#ffb694",
+                "secondary-container": "#fe7a34",
+                "error": "#ba1a1a",
+                "secondary-fixed": "#ffdbcc",
+                "on-secondary": "#ffffff",
+                "inverse-on-surface": "#f0f1f2",
+                "primary": "#012d1d",
+                "surface-container-lowest": "#ffffff",
+                "secondary": "#a14000",
+                "on-error-container": "#93000a",
+                "primary-container": "#1b4332",
+                "surface-container": "#edeeef"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "gutter": "24px",
+                "margin-desktop": "48px",
+                "margin-mobile": "16px",
+                "max-width": "1440px",
+                "base": "8px"
+            },
+            "fontFamily": {
+                "display-lg": ["Inter"],
+                "label-md": ["Inter"],
+                "headline-lg": ["Inter"],
+                "headline-lg-mobile": ["Inter"],
+                "body-lg": ["Inter"],
+                "body-md": ["Inter"],
+                "headline-md": ["Inter"],
+                "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for mobile categories */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Subtle texture for industrial feel */
+        .industrial-grid {
+            background-image: radial-gradient(circle, #e1e3e4 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface shadow-[0_10px_25px_rgba(27,67,50,0.08)]">
+<div class="flex justify-between items-center px-margin-mobile h-16 w-full max-w-max-width mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary dark:text-inverse-primary" data-icon="agriculture">agriculture</span>
+<h1 class="font-headline-md text-headline-md font-extrabold text-primary dark:text-primary-fixed-dim">AgriModern</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity active:scale-95 duration-150">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-16 industrial-grid">
+<!-- Search Section (Floating below header) -->
+<div class="px-margin-mobile mt-6">
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline" data-icon="search">search</span>
+</div>
+<input class="w-full h-12 pl-12 pr-4 bg-surface-container-lowest border border-outline-variant rounded-full text-body-md focus:ring-2 focus:ring-primary focus:border-primary transition-all shadow-sm" placeholder="Search equipment, pipes, or machinery..." type="text"/>
+</div>
+</div>
+<!-- Hero Section -->
+<section class="mt-6 px-margin-mobile">
+<div class="relative overflow-hidden rounded-xl shadow-lg h-64 flex items-end">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="A high-performance modern green tractor equipped with advanced GPS technology working in a vast, lush field at golden hour. The sunlight reflects off the metallic industrial surfaces, highlighting the durable build and precision engineering. Cinematic lighting, professional photography style with a deep agricultural green and safety orange color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBM0JF-MIIwhb5AijxJu6ArtLzBDjrLWmjtHq_rlOiFBES2jKhuimEprTPiUbNnpYWwhyUXruqGcRQCZNFU4rbg2AFcPwgvDbMz-k669q66yO5ktrpXjOfpH5vQL6VWus79U3WodVImDU-4NN90IkF8xPHwmEmp79Hr99XXqhYIqsvrjtg9aPVkk5neLTc7936lAfrBMDI0KKnAaKI3XU7tJif99W86ZnqO4amT63T_352PT1FggK2h_WpzgRVw9WKgQGbyhaRjDjhK"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+</div>
+<div class="relative z-10 p-6">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-white leading-tight mb-2">Modern Solutions for Productive Farming</h2>
+<p class="text-label-sm text-white/80 mb-4 max-w-[280px]">Premium machinery and irrigation equipment delivered to your farm.</p>
+<button class="bg-secondary-container hover:bg-secondary text-on-secondary font-label-md px-6 py-2.5 rounded-xl shadow-md transition-all active:scale-95">
+                        Shop Now
+                    </button>
+</div>
+</div>
+</section>
+<!-- Category Grid -->
+<section class="mt-10 px-margin-mobile">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-headline-md text-headline-md text-primary">Categories</h3>
+<button class="text-primary font-label-sm flex items-center">
+                    View All <span class="material-symbols-outlined text-[18px] ml-1" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Category Card 1 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border-l-4 border-primary hover:shadow-md transition-shadow group cursor-pointer">
+<div class="w-12 h-12 bg-primary/5 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary" data-icon="water_drop">water_drop</span>
+</div>
+<span class="font-label-md text-on-surface">Sprayers</span>
+</div>
+<!-- Category Card 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border-l-4 border-tertiary-container hover:shadow-md transition-shadow group cursor-pointer">
+<div class="w-12 h-12 bg-tertiary-container/5 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-tertiary-container" data-icon="horizontal_distribute">horizontal_distribute</span>
+</div>
+<span class="font-label-md text-on-surface">HDPE Pipes</span>
+</div>
+<!-- Category Card 3 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border-l-4 border-secondary-container hover:shadow-md transition-shadow group cursor-pointer">
+<div class="w-12 h-12 bg-secondary-container/5 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-secondary-container" data-icon="hardware">hardware</span>
+</div>
+<span class="font-label-md text-on-surface">Pipe Fittings</span>
+</div>
+<!-- Category Card 4 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border-l-4 border-primary hover:shadow-md transition-shadow group cursor-pointer">
+<div class="w-12 h-12 bg-primary/5 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary" data-icon="opacity">opacity</span>
+</div>
+<span class="font-label-md text-on-surface">Irrigation Systems</span>
+</div>
+<!-- Category Card 5 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border-l-4 border-tertiary-container hover:shadow-md transition-shadow group cursor-pointer">
+<div class="w-12 h-12 bg-tertiary-container/5 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-tertiary-container" data-icon="agriculture">agriculture</span>
+</div>
+<span class="font-label-md text-on-surface">Agri Machinery</span>
+</div>
+<!-- Category Card 6 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border-l-4 border-secondary-container hover:shadow-md transition-shadow group cursor-pointer">
+<div class="w-12 h-12 bg-secondary-container/5 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-secondary-container" data-icon="security">security</span>
+</div>
+<span class="font-label-md text-on-surface">Crop Protection</span>
+</div>
+</div>
+</section>
+<!-- Featured Products -->
+<section class="mt-10 mb-10">
+<div class="px-margin-mobile flex items-center justify-between mb-4">
+<h3 class="font-headline-md text-headline-md text-primary">New Arrivals</h3>
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-label-sm">Top Rated</span>
+</div>
+<div class="flex overflow-x-auto gap-6 px-margin-mobile no-scrollbar pb-4">
+<!-- Product Card 1 -->
+<div class="min-w-[240px] bg-white rounded-xl shadow-sm border border-outline-variant overflow-hidden flex-shrink-0 group">
+<div class="h-40 relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A heavy-duty industrial irrigation pump made of high-quality cast iron, featuring a polished steel shaft and bright safety orange accents. The pump is shown in a professional studio setting with clean, bright lighting that emphasizes its robust construction and high-performance utility. Modern agro-industrial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHumcl0genAZBf8s2-o7odT_q9keSYLM7N3mRFdjs7h5HmETLtPjrBnciviSj8BQEySxbWQqfonRaY0K_lQqXPzBtzJOv7tGK6Ha2CgcDGdfQyFyKXnxWnNGp284E-NNOtlQy48rudELkaHfy6zz2gk19lQF9yhWt2Z3mfiJJbGZ3_QTGrKLnrGXM_UmsYQnPkZuj3Nl6-lhD2rAj8iHBvSe5BLZ_L1bLzkedBq0VlzeRBmISO0byJhks_V7b_hl2QcEJXyZE7ibSs"/>
+<div class="absolute top-2 right-2">
+<button class="w-8 h-8 bg-white/90 backdrop-blur rounded-full flex items-center justify-center text-primary active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite">favorite</span>
+</button>
+</div>
+</div>
+<div class="p-4">
+<h4 class="font-label-md text-on-surface truncate">High-Flow Centrifugal Pump</h4>
+<div class="flex items-center gap-1 my-1">
+<span class="material-symbols-outlined text-secondary-container text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm text-on-surface-variant">4.9 (124)</span>
+</div>
+<div class="flex items-center justify-between mt-3">
+<span class="font-headline-md text-primary text-lg">$1,249.00</span>
+<button class="bg-primary text-white w-10 h-10 rounded-lg flex items-center justify-center hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="min-w-[240px] bg-white rounded-xl shadow-sm border border-outline-variant overflow-hidden flex-shrink-0 group">
+<div class="h-40 relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A professional-grade automatic boom sprayer for crops, featuring precise nozzles and a durable stainless steel tank. The equipment is rendered in a high-tech farming environment with soft overhead lighting. The color palette is dominated by industrial grey and agricultural green, highlighting the technological efficiency." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuVCikyiKEQ0z_z9dYB5iLvbG_Beg3lRlx1eFEjihNJ9zAexF8Z7LHzJChk279s4lhP24RDdE35sVLzzV3_2TKwn5_40c55dDmSnfeEE9PvY30MjOdz8r3oq3z6PXZ3Cxl6amMM3ufHEXC4Op0vEHtZu-GmkxmgfF-7Wt185OVKnydS0maWHcn0KvZ_RRWxZ0f_0vcjG9322xAzPz2uwYZzKa08_rasz0eOjoFvVnagcFAf11UvmcWQRkCOieeCreGDu17_JjOWEk5"/>
+<div class="absolute top-2 right-2">
+<button class="w-8 h-8 bg-white/90 backdrop-blur rounded-full flex items-center justify-center text-primary active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite">favorite</span>
+</button>
+</div>
+</div>
+<div class="p-4">
+<h4 class="font-label-md text-on-surface truncate">Precision Boom Sprayer V2</h4>
+<div class="flex items-center gap-1 my-1">
+<span class="material-symbols-outlined text-secondary-container text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm text-on-surface-variant">4.8 (89)</span>
+</div>
+<div class="flex items-center justify-between mt-3">
+<span class="font-headline-md text-primary text-lg">$2,890.00</span>
+<button class="bg-primary text-white w-10 h-10 rounded-lg flex items-center justify-center hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats/USP Section -->
+<section class="px-margin-mobile mb-10">
+<div class="bg-primary-container text-on-primary-container p-6 rounded-2xl flex flex-col gap-4">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-on-primary-container/20 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-inverse-primary" data-icon="verified">verified</span>
+</div>
+<div>
+<h4 class="font-label-md text-inverse-primary">Official Distributor</h4>
+<p class="text-label-sm opacity-80">Certified partner for global agricultural machinery brands.</p>
+</div>
+</div>
+<div class="h-px bg-on-primary-container/10"></div>
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-on-primary-container/20 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-inverse-primary" data-icon="local_shipping">local_shipping</span>
+</div>
+<div>
+<h4 class="font-label-md text-inverse-primary">Farm-Side Delivery</h4>
+<p class="text-label-sm opacity-80">Heavy equipment logistics handled directly to your site.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface dark:bg-surface-container-low shadow-[0_-4px_12px_rgba(27,67,50,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-full px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-label-sm text-label-sm">Catalog</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-label-sm text-label-sm">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+<span class="font-label-sm text-label-sm">Support</span>
+</a>
+</nav>
+<script>
+        // Simple scroll behavior for header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-md');
+            } else {
+                header.classList.remove('shadow-md');
+            }
+        });
+
+        // Add micro-interaction to category cards
+        document.querySelectorAll('.group').forEach(card => {
+            card.addEventListener('touchstart', () => {
+                card.classList.add('scale-[0.98]');
+            });
+            card.addEventListener('touchend', () => {
+                card.classList.remove('scale-[0.98]');
+            });
+        });
+    </script>
+</body></html>

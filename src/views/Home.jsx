@@ -3,13 +3,90 @@ import { useAppState } from '../context/StateContext';
 import { useI18n } from '../utils/i18n';
 import { getCategoryIcon } from '../components/Icons';
 
+// Category definitions for the home grid
+const HOME_CATEGORIES = [
+  {
+    name: 'Sprayers',
+    queryName: 'Power Sprayers',
+    borderColor: '#E87722',
+    iconColor: '#E87722',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 28, height: 28 }}>
+        <path d="M12 2a5 5 0 0 1 5 5c0 3.5-5 13-5 13S7 10.5 7 7a5 5 0 0 1 5-5z" />
+        <circle cx="12" cy="7" r="1.5" fill="currentColor" />
+      </svg>
+    )
+  },
+  {
+    name: 'HDPE Pipes',
+    queryName: 'HDPE Pipes',
+    borderColor: '#00264b',
+    iconColor: '#00264b',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 28, height: 28 }}>
+        <line x1="4" y1="9" x2="20" y2="9" />
+        <line x1="4" y1="15" x2="20" y2="15" />
+        <line x1="4" y1="9" x2="4" y2="15" />
+        <line x1="20" y1="9" x2="20" y2="15" />
+      </svg>
+    )
+  },
+  {
+    name: 'Pipe Fittings',
+    queryName: 'Moulded Fittings',
+    borderColor: '#E87722',
+    iconColor: '#E87722',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 28, height: 28 }}>
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <path d="M14 2v6h6" />
+      </svg>
+    )
+  },
+  {
+    name: 'Irrigation Systems',
+    queryName: 'MDPE Pipes',
+    borderColor: '#012d1d',
+    iconColor: '#012d1d',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 28, height: 28 }}>
+        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+      </svg>
+    )
+  },
+  {
+    name: 'Agri Machinery',
+    queryName: 'Battery Spray Pumps',
+    borderColor: '#00264b',
+    iconColor: '#00264b',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 28, height: 28 }}>
+        <circle cx="5" cy="17" r="3" />
+        <circle cx="19" cy="17" r="3" />
+        <path d="M5 14V9l4-5h8l2 5v5" />
+        <path d="M9 4v10" />
+      </svg>
+    )
+  },
+  {
+    name: 'Crop Protection',
+    queryName: 'Knapsack Sprayers',
+    borderColor: '#E87722',
+    iconColor: '#E87722',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 28, height: 28 }}>
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </svg>
+    )
+  }
+];
+
 export default function Home() {
   const { products, showModal, testimonials } = useAppState();
   const { t } = useI18n();
 
   // 1. Hero Image Slider State
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isHeroHovered, setIsHeroHovered] = useState(false);
 
   const heroSlides = [
     {
@@ -57,20 +134,11 @@ export default function Home() {
   ];
 
   useEffect(() => {
-    if (isHeroHovered) return;
     const timer = setInterval(() => {
       setCurrentSlide(prev => (prev + 1) % heroSlides.length);
     }, 3500);
     return () => clearInterval(timer);
-  }, [isHeroHovered]);
-
-  const nextHeroSlide = () => {
-    setCurrentSlide(prev => (prev + 1) % heroSlides.length);
-  };
-
-  const prevHeroSlide = () => {
-    setCurrentSlide(prev => (prev - 1 + heroSlides.length) % heroSlides.length);
-  };
+  }, []);
 
   // 2. Testimonials Carousel State
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -98,64 +166,47 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero Banner */}
-      <section className="hero-section">
-        <div className="hero-bg"></div>
-        <div className="container hero-grid">
-          <div className="hero-content">
-            <div className="hero-subtitle">{t('hero_subtitle')}</div>
-            <h1 className="hero-title" dangerouslySetInnerHTML={{ __html: t('hero_title') }} />
-            <p className="hero-desc">{t('hero_desc')}</p>
-            <div className="hero-actions">
-              <a href="#shop" className="btn btn-primary">{t('btn_explore')}</a>
-              <a href="#about" className="btn btn-secondary">{t('btn_learn_more')}</a>
-            </div>
+      {/* ── NEW Mobile-style Hero Banner ── */}
+      <section className="mhero-section">
+        <div className="mhero-inner">
+          {/* Background image */}
+          <img
+            className="mhero-bg-img"
+            src={heroSlides[currentSlide]?.img || '/images/power_sprayer.png'}
+            alt={heroSlides[currentSlide]?.alt || 'Mech Corner'}
+          />
+          {/* Gradient overlay */}
+          <div className="mhero-overlay" />
+          {/* Content */}
+          <div className="mhero-content">
+            <h1 className="mhero-title">Modern Solutions for Productive Farming</h1>
+            <p className="mhero-desc">Premium machinery and irrigation equipment delivered to your farm.</p>
+            <a href="#shop" className="mhero-btn">Shop Now</a>
           </div>
+        </div>
+      </section>
 
-          <div className="hero-image-wrapper">
-            <div
-              className="hero-slider-container"
-              onMouseEnter={() => setIsHeroHovered(true)}
-              onMouseLeave={() => setIsHeroHovered(false)}
-            >
-              <div className="hero-slider-track" id="hero-slider-track">
-                {heroSlides.map((slide, idx) => (
-                  <div
-                    key={idx}
-                    className={`hero-slide ${idx === currentSlide ? 'active' : ''}`}
-                  >
-                    <img src={slide.img} alt={slide.alt} />
-                    <div className="hero-badge">
-                      <span className="hero-badge-number">{slide.number}</span>
-                      <span className="hero-badge-text">{slide.text}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Slider Arrows */}
-              <button className="hero-slide-nav prev" onClick={prevHeroSlide} aria-label="Previous Slide">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-              </button>
-              <button className="hero-slide-nav next" onClick={nextHeroSlide} aria-label="Next Slide">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </button>
-
-              {/* Dots */}
-              <div className="hero-slider-dots">
-                {heroSlides.map((_, idx) => (
-                  <span
-                    key={idx}
-                    className={`hero-dot ${idx === currentSlide ? 'active' : ''}`}
-                    onClick={() => setCurrentSlide(idx)}
-                  ></span>
-                ))}
-              </div>
-            </div>
+      {/* ── Categories Grid ── */}
+      <section className="mcat-section">
+        <div className="container">
+          <div className="mcat-header">
+            <h2 className="mcat-title">Categories</h2>
+            <a href="#shop" className="mcat-viewall">View All <span aria-hidden="true">›</span></a>
+          </div>
+          <div className="mcat-grid">
+            {HOME_CATEGORIES.map((cat) => (
+              <a
+                key={cat.name}
+                href={`#shop?category=${encodeURIComponent(cat.queryName)}`}
+                className="mcat-card"
+                style={{ borderLeftColor: cat.borderColor }}
+              >
+                <div className="mcat-icon" style={{ color: cat.iconColor }}>
+                  {cat.icon}
+                </div>
+                <span className="mcat-name">{cat.name}</span>
+              </a>
+            ))}
           </div>
         </div>
       </section>
