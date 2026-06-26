@@ -65,18 +65,18 @@ export default function Footer() {
           <div className="footer-link-group">
             <h4 className="footer-group-title" id="footer-title-sitemap">{t('footer_title_sitemap')}</h4>
             <ul className="footer-links">
-              <li><a href="#home">{t('nav_home')}</a></li>
-              <li><a href="#shop">{t('nav_products')}</a></li>
-              <li><a href="#about">{t('nav_about')}</a></li>
-              <li><a href="#contact">{t('nav_contact')}</a></li>
+              <li><a href="#home" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>{t('nav_home')}</a></li>
+              <li><a href="#shop" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>{t('nav_products')}</a></li>
+              <li><a href="#about" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>{t('nav_about')}</a></li>
+              <li><a href="#contact" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>{t('nav_contact')}</a></li>
             </ul>
           </div>
           <div className="footer-link-group">
             <h4 className="footer-group-title" id="footer-title-products">{t('footer_title_products')}</h4>
             <ul className="footer-links">
-              <li><a href="#shop?category=Power%20Sprayers">{t('Power Sprayers')}</a></li>
-              <li><a href="#shop?category=Knapsack%20Sprayers">{t('Knapsack Sprayers')}</a></li>
-              <li><a href="#shop?category=Battery%20Spray%20Pumps">{t('Battery Spray Pumps')}</a></li>
+              <li><a href="#shop?category=Power%20Sprayers" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>{t('Power Sprayers')}</a></li>
+              <li><a href="#shop?category=Knapsack%20Sprayers" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>{t('Knapsack Sprayers')}</a></li>
+              <li><a href="#shop?category=Battery%20Spray%20Pumps" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>{t('Battery Spray Pumps')}</a></li>
             </ul>
           </div>
           <div className="footer-link-group">
