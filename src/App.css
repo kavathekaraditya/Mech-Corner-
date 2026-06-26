@@ -673,7 +673,7 @@ img {
   width: 100%;
   max-width: var(--container-max-width);
   margin: 0 auto;
-  height: 280px;
+  height: 400px;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: var(--shadow-lg);
@@ -683,13 +683,13 @@ img {
 
 @media (min-width: 640px) {
   .mhero-inner {
-    height: 340px;
+    height: 480px;
   }
 }
 
 @media (min-width: 1024px) {
   .mhero-inner {
-    height: 400px;
+    height: 560px;
   }
 }
 
