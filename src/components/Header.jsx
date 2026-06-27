@@ -42,11 +42,11 @@ export default function Header({ activePath }) {
     <header className={`main-header ${scrolled ? 'scrolled' : ''}`} id="main-header">
       <div className="header-container">
         <a href="#home" className="logo" onClick={handleLinkClick}>
-          <svg className="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L2 22H22L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M12 8L18 20H6L12 8Z" fill="currentColor" />
-            <circle cx="12" cy="14" r="2" fill="var(--color-bg)" />
-          </svg>
+          <img
+            src="/images/LS.png"
+            alt="Mech Corner Logo"
+            className="logo-img"
+          />
           <span className="logo-text">Mech <span className="logo-accent">Corner</span></span>
         </a>
 
